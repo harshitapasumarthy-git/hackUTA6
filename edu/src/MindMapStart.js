@@ -1,33 +1,51 @@
 import React, { useState } from "react";
-
 import MindMap from "./mindmap/MindMap";
 import NodeOptionsModal from "./mindmap/NodeOptionalModal";
-import { parseDocument } from "./mindmap/parser/parseDocument";
+
 const MindMapStart = () => {
-  const [documentText, setDocumentText] = useState(`
-# Distributed Systems
-## Consensus Algorithms
-### Paxos
-### Raft
-## Replication
-### State Machine Replication
-### Primary-Backup
-    `);
+  const [documentText, setDocumentText] = useState(`{
+  "name": "Distributed Systems",
+  "children": [
+    {
+      "name": "Consensus Algorithms",
+      "children": [
+        { "name": "Paxos" },
+        { "name": "Raft" }
+      ]
+    },
+    {
+      "name": "Replication",
+      "children": [
+        { "name": "State Machine Replication" },
+        { "name": "Primary-Backup" }
+      ]
+    }
+  ]
+}`);
+
   const [mindMapData, setMindMapData] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedNode, setSelectedNode] = useState(null);
+
   const handleTextChange = (e) => {
     setDocumentText(e.target.value);
   };
+
   const closeModal = () => {
     setModalIsOpen(false);
     setSelectedNode(null);
   };
 
   const generateMindMap = () => {
-    const parsedData = parseDocument(documentText);
-    setMindMapData(parsedData);
+    try {
+      const parsedData = JSON.parse(documentText);
+      setMindMapData(parsedData);
+    } catch (error) {
+      alert("Invalid JSON format. Please correct the JSON and try again.");
+      console.error(error);
+    }
   };
+
   const handleNodeClick = (nodeData) => {
     alert(`Node clicked: ${nodeData.name}`);
   };
@@ -36,8 +54,8 @@ const MindMapStart = () => {
     <div>
       <h1>Mind Map Generator</h1>
       <textarea
-        rows="10"
-        cols="50"
+        rows="20"
+        cols="80"
         value={documentText}
         onChange={handleTextChange}
       ></textarea>
