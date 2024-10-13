@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";  // Material-UI's CircularProgress
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";  // Example of a custom icon for the button
 
 const FileUploader = ({ onFileUpload }) => {
   const [isLoading, setIsLoading] = useState(false);  // Loading state
@@ -38,17 +40,22 @@ const FileUploader = ({ onFileUpload }) => {
           fontSize: "14px",
           cursor: "pointer",
           backgroundColor: "#FD8B51",
+          color: "white",
+          display: "flex",  // Added flexbox to align the icon and label horizontally
+          alignItems: "center",
         }}
         disabled={isLoading}  // Disable the button while loading
       >
-        <label htmlFor="fileInput">Choose File</label>
+        <label htmlFor="fileInput" style={{ cursor: "pointer", display: "flex", alignItems: "center" }}>
+          <CloudUploadIcon style={{ marginRight: "8px" }} />  {/* Material-UI Upload Icon */}
+          {isLoading ? "Uploading..." : "Choose File"}
+        </label>
       </button>
 
-      {/* Show the spinner or loading text when the file is being processed */}
+      {/* Show the spinner when the file is being processed */}
       {isLoading && (
         <div style={{ marginTop: "10px" }}>
-          <div className="spinner" />
-          <p>Loading...</p>
+          <CircularProgress color="secondary" />  {/* Material-UI CircularProgress component */}
         </div>
       )}
     </div>
