@@ -1,39 +1,28 @@
-import React, { useState } from 'react';
-import MindMap from './MindMap/MindMap';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ButtonComponent = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handleClick = (buttonType) => {
-    if (buttonType === "Mindmap") {
-      setCurrentIndex((_) => 2);
-    }
-    alert(`You clicked on ${buttonType}`);
-  };
+  const navigate = useNavigate();
+  const handleClick = (buttonType) => {};
 
   return (
-    <>
-      <div style={styles.container}>
-        <button style={styles.button} onClick={() => handleClick("Quiz")}>
-          Quiz
-        </button>
-        <button style={styles.button} onClick={() => handleClick("Flashcards")}>
-          Flashcards
-        </button>
-        <button style={styles.button} onClick={() => handleClick("Mindmap")}>
-          Mindmap
-        </button>
-      </div>
-      <div style={styles.mindmapContainer}>
-        {currentIndex === 2 ? <MindMap /> : <></>}
-      </div>
-    </>
+    <div style={styles.container}>
+      <button style={styles.button} onClick={() => handleClick("Quiz")}>
+        Quiz
+      </button>
+      <button style={styles.button} onClick={() => handleClick("Flashcards")}>
+        Flashcards
+      </button>
+      <button style={styles.button} onClick={() => handleClick("Mindmap")}>
+        Mindmap
+      </button>
+    </div>
   );
 };
 
 const styles = {
   container: {
-    // display: "flex",
+    display: "flex",
     justifyContent: "center",
     gap: "10px",
     margin: "20px",

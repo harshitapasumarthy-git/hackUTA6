@@ -1,13 +1,15 @@
-import React from 'react';
-import './App.css';
-import ButtonComponent from '../src/Component/Button'; // Import the component
+import React from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import "./App.css";
+import Home from "./Home";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to the Mind Map Project</h1>
-      <ButtonComponent />  {/* Render the button component here */}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
 
