@@ -4,7 +4,6 @@ const FileUploader = ({ onFileUpload }) => {
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      alert("in handleFileChange");
       onFileUpload(file.name); // Pass the file object to the parent component
     }
   };

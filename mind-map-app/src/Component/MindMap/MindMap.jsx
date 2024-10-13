@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Graph } from "react-d3-graph";
-import config from "./mindmap.config";
-import { initialDSNodes, initialDSLinks } from "./distributed_systems";
-import { initialLungNodes, initialLungLinks } from "./lung";
 import { useParams } from 'react-router-dom';
+import { initialDSLinks, initialDSNodes } from "./distributed_systems";
+import { initialLungLinks, initialLungNodes } from "./lung";
+import config from "./mindmap.config";
 
 const containerWidth = 1300; 
 const containerHeight = 700;
@@ -35,7 +35,7 @@ const MindMap = () => {
   let linkData = initialDSLinks;
 
   if (fileName !== null) {
-    if("lung.pdf" === fileName) {
+    if("lung_cancer.pdf" === fileName) {
         nodeData = initialLungNodes;
         linkData = initialLungLinks;
     } 

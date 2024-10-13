@@ -13,7 +13,7 @@ function App() {
       <Box
         sx={{
           backgroundColor: "#D2E0FB", // Background color of the Box
-          minHeight: "100vh", // Full viewport height
+          // Full viewport height
           display: "flex", // Flexbox for centering
           justifyContent: "center", // Horizontal center alignment
           alignItems: "center", // Vertical center alignment

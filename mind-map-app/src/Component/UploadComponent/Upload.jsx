@@ -6,7 +6,7 @@ const Upload = ({callBack}) => {
     
   const handleProcessFile = async (file) => {
     setLoading(true);
-    alert('request will be sent here');
+  
     setLoading(false);
   };
 

@@ -30,7 +30,9 @@ const ButtonComponent = ({ onProcessFile }) => {
       navigate("/Flashcards");
     }
     if (buttonType === "Quiz") {
-      navigate("/Quiz");
+      navigate("Quiz", {
+        state: { fileName: fileName },
+      });
     }
   };
 
