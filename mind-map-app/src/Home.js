@@ -18,7 +18,7 @@ function Home() {
         variant="h3" // You can adjust the variant (h1, h2, h3, etc.) based on your design
         align="center" // Centers the text horizontally
         sx={{
-          color: "#1976d2", // Sets the text color (blue in this case)
+          color: "#FD8B51", // Sets the text color (blue in this case)
           fontWeight: "bold", // Makes the text bold
           marginBottom: "200px",
 

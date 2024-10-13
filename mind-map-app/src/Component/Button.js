@@ -42,16 +42,16 @@ const ButtonComponent = ({ onProcessFile }) => {
     <React.Fragment>
       {fileName !== null && (
         <div style={styles.container}>
-          <button style={styles.button} onClick={() => handleClick("Quiz")}>
+          <button  onClick={() => handleClick("Quiz")}>
             Quiz
           </button>
           <button
-            style={styles.button}
+            // style={styles.button}
             onClick={() => handleClick("Flashcards")}
           >
             Flashcards
           </button>
-          <button style={styles.button} onClick={() => handleClick("Mindmap")}>
+          <button  onClick={() => handleClick("Mindmap")}>
             Mindmap
           </button>
         </div>
@@ -112,7 +112,7 @@ const styles = {
     cursor: "pointer",
     borderRadius: "5px",
     border: "1px solid #ccc",
-    backgroundColor: "#",
+    backgroundColor: "#FD8B51",
   },
 };
 
