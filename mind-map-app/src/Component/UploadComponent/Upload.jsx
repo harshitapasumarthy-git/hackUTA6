@@ -6,17 +6,13 @@ const Upload = ({callBack}) => {
     
   const handleProcessFile = async (file) => {
     setLoading(true);
-  
-    setLoading(false);
+    //alert("you got it")
   };
 
   return (
       <div className="container">
     
         <ButtonComponent onProcessFile={handleProcessFile} />
-        {loading && (
-          <p className="text-center text-info mt-3">Loading...</p>
-        )}
       </div>    
   );
 }
