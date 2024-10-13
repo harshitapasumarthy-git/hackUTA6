@@ -4,7 +4,13 @@ const FileUploader = ({ onFileUpload }) => {
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      onFileUpload(file.name); // Pass the file object to the parent component
+      // Generate a random delay between 3 to 5 seconds
+      const delay = Math.floor(Math.random() * (5000 - 3000 + 1)) + 3000; // Random delay between 3000ms and 5000ms
+
+      // Delay the onFileUpload call
+      setTimeout(() => {
+        onFileUpload(file.name); // Pass the file object to the parent component after delay
+      }, delay);
     }
   };
 

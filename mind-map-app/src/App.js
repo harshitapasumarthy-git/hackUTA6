@@ -13,10 +13,11 @@ function App() {
       <Box
         sx={{
           backgroundColor: "#D2E0FB", // Background color of the Box
-          // Full viewport height
-          display: "flex", // Flexbox for centering
-          justifyContent: "center", // Horizontal center alignment
-          alignItems: "center", // Vertical center alignment
+          minHeight: "100vh", // Full viewport height
+          display: "flex", // Flexbox for centering content
+          flexDirection: "column", // Stack content vertically
+          justifyContent: "center", // Center alignment
+          alignItems: "center", // Center alignment
           padding: "20px",
         }}
       >
@@ -26,6 +27,19 @@ function App() {
           <Route path="/Quiz" element={<Quiz />} />
           <Route path="/MindMap" element={<MindMap />} />
         </Routes>
+
+        {/* Add an image at the bottom */}
+        <Box
+          component="img"
+          sx={{
+            marginTop: "auto", // Push the image to the bottom
+            width: "400px", // Set the image width
+            height: "auto",
+            marginBottom: "100px", // Maintain aspect ratio
+          }}
+          src="/SuccessKid.jpg" // Replace with the path to your image
+          alt="Bottom image"
+        />
       </Box>
     </Router>
   );
