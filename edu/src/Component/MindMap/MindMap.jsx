@@ -23,7 +23,7 @@ const generateCoordinates = (nodes, centerX, centerY, radius) => {
 
 
 const MindMap = () => {  
-
+  const [selectedNode, setSelectedNode] = useState();
   const [selectedDescription, setSelectedDescription] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   
@@ -37,6 +37,7 @@ const MindMap = () => {
   const handleOnClick = (nodeId) => {
     const node = initialDSNodes.find(n => n.id === nodeId);
     if (node) {
+      setSelectedNode((prev) => nodeId)
       setSelectedDescription((_) => node.description); 
       setIsModalOpen((_) => true);
     }
@@ -47,15 +48,14 @@ const MindMap = () => {
   }
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh" }}>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
       <div style={{ width: "100%", height: "100%"}}> 
         <Graph
           id="mindmap"
           data={graphData}
           config={config}
           onClickNode={handleOnClick}  
-        />
-        {/* Modal */}
+        />        
         {isModalOpen && (
           <div style={modalStyles.overlay}>
             <div style={modalStyles.modal}>
