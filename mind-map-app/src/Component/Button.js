@@ -27,7 +27,9 @@ const ButtonComponent = ({ onProcessFile }) => {
       navigate(`/MindMap/${fileName}`);
     }
     if (buttonType === "Flashcards") {
-      navigate("/Flashcards");
+      navigate("Flashcards", {
+        state: { fileName: fileName },
+      });
     }
     if (buttonType === "Quiz") {
       navigate("Quiz", {
