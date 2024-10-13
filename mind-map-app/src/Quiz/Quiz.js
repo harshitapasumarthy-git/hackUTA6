@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ChevronLeft } from "@material-ui/icons";
 import "./Quiz.css";
+import { IconButton } from "@material-ui/core"; // Import Material UI IconButton
 
 const defaultQuizData = [
   {
@@ -364,9 +366,7 @@ function Quiz() {
   const location = useLocation();
   const { fileName } = location.state || {};
   const [currentQuizData, setCurrentQuizData] = useState(DS1); // State to hold the current quiz data
-  const [userAnswers, setUserAnswers] = useState(
-    Array(DS1.length).fill(null)
-  ); // Track user's answers
+  const [userAnswers, setUserAnswers] = useState(Array(DS1.length).fill(null)); // Track user's answers
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
 
@@ -407,118 +407,144 @@ function Quiz() {
     setShowScore(true);
   };
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "100vh", // Full viewport height to center vertically
-        gap: "20px", // Spacing between the elements
-        padding: "20px",
-        backgroundColor: "#CFE8F6",
-      }}
-    >
-      {showScore ? (
-        <div className="result-section">
-          <h4 style={{ textAlign: "center" }}>
-            You scored {score} out of {currentQuizData.length}
-          </h4>
+  const navigate = useNavigate();
 
-          <h5 style={{ textAlign: "center" }}>Review your answers:</h5>
-          <ul style={{ listStyleType: "none", padding: 0 }}>
-            {currentQuizData.map((q, index) => (
-              <li key={index} style={{ marginBottom: "10px" }}>
-                <strong>Question {index + 1}:</strong> {q.question}
-                <div>
-                  <strong>Your answer:</strong> {userAnswers[index]}{" "}
-                  {userAnswers[index] === q.answer ? "✅" : "❌"}
-                </div>
-                {userAnswers[index] !== q.answer && (
+  const goPrev = () => {    
+    navigate("/FlashCards", {
+      state: { fileName: fileName },
+    });
+  };
+
+  return (
+    <React.Fragment>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "100vh", // Full viewport height to center vertically
+          gap: "20px", // Spacing between the elements
+          padding: "20px",
+          backgroundColor: "#CFE8F6",
+        }}
+      >
+        {showScore ? (
+          <div className="result-section">
+            <h4 style={{ textAlign: "center" }}>
+              You scored {score} out of {currentQuizData.length}
+            </h4>
+
+            <h5 style={{ textAlign: "center" }}>Review your answers:</h5>
+            <ul style={{ listStyleType: "none", padding: 0 }}>
+              {currentQuizData.map((q, index) => (
+                <li key={index} style={{ marginBottom: "10px" }}>
+                  <strong>Question {index + 1}:</strong> {q.question}
                   <div>
-                    <strong>Correct answer:</strong> {q.answer}
+                    <strong>Your answer:</strong> {userAnswers[index]}{" "}
+                    {userAnswers[index] === q.answer ? "✅" : "❌"}
                   </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmitQuiz}>
-          {currentQuizData.map((q, index) => (
-            <div
-              key={index}
-              style={{
-                marginBottom: "20px",
-                width: "100%",
-                maxWidth: "600px",
-                padding: "20px",
-                backgroundColor: "#FFFFFF",
-                border: "1px solid #ccc",
-                borderRadius: "10px",
-              }}
-            >
-              <h6 style={{ textAlign: "center" }}>{q.question}</h6>
+                  {userAnswers[index] !== q.answer && (
+                    <div>
+                      <strong>Correct answer:</strong> {q.answer}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmitQuiz}>
+            {currentQuizData.map((q, index) => (
               <div
+                key={index}
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
+                  marginBottom: "20px",
+                  width: "100%",
+                  maxWidth: "600px",
+                  padding: "20px",
+                  backgroundColor: "#FFFFFF",
+                  border: "1px solid #ccc",
+                  borderRadius: "10px",
                 }}
               >
-                {q.options.map((option) => (
-                  <div
-                    key={option}
-                    onClick={() => handleOptionChange(index, option)}
-                    style={{
-                      padding: "10px",
-                      border: "1px solid",
-                      borderRadius: "10px",
-                      textAlign: "center",
-                      cursor: "pointer",
-                      width: "100%",
-                      backgroundColor:
-                        userAnswers[index] === option ? "#FD8B51" : "white",
-                      color: userAnswers[index] === option ? "white" : "black",
-                      margin: "5px 0",
-                      transition: "#FD8B51",
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.backgroundColor =
-                        userAnswers[index] === option ? "#FD8B51" : "#f5f5f5")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.backgroundColor =
-                        userAnswers[index] === option ? "#FD8B51" : "white")
-                    }
-                  >
-                    {option}
-                  </div>
-                ))}
+                <h6 style={{ textAlign: "center" }}>{q.question}</h6>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  {q.options.map((option) => (
+                    <div
+                      key={option}
+                      onClick={() => handleOptionChange(index, option)}
+                      style={{
+                        padding: "10px",
+                        border: "1px solid",
+                        borderRadius: "10px",
+                        textAlign: "center",
+                        cursor: "pointer",
+                        width: "100%",
+                        backgroundColor:
+                          userAnswers[index] === option ? "#FD8B51" : "white",
+                        color:
+                          userAnswers[index] === option ? "white" : "black",
+                        margin: "5px 0",
+                        transition: "#FD8B51",
+                      }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          userAnswers[index] === option ? "#FD8B51" : "#f5f5f5")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          userAnswers[index] === option ? "#FD8B51" : "white")
+                      }
+                    >
+                      {option}
+                    </div>
+                  ))}
+                </div>
               </div>
+            ))}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button
+                style={{
+                  padding: "10px 20px",
+                  border: "none",
+                  borderRadius: "5px",
+                  backgroundColor: userAnswers.includes(null)
+                    ? "#F4CBB2"
+                    : "#FD8B51", // lighter shade when disabled
+                  color: "white",
+                  cursor: "pointer",
+                  fontSize: "16px",
+                }}
+                type="submit"
+                disabled={userAnswers.includes(null)}
+              >
+                Submit Quiz
+              </button>
             </div>
-          ))}
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <button
-              style={{
-                padding: "10px 20px",
-                border: "none",
-                borderRadius: "5px",
-                backgroundColor: userAnswers.includes(null) ? "#F4CBB2" : "#FD8B51", // lighter shade when disabled
-                color: "white",
-                cursor: "pointer",
-                fontSize: "16px",
-              }}
-              type="submit"
-              disabled={userAnswers.includes(null)}
-            >
-              Submit Quiz
-            </button>
-          </div>
-        </form>
-      )}
-    </div>
+          </form>
+        )}
+      </div>
+      <IconButton
+        onClick={goPrev}
+        style={{
+          position: "absolute",
+          left: "20px",
+          top: "50%",
+          width: "35px",
+          backgroundColor: "#FD8B51",
+          padding: "5px",
+        }}
+      >
+        <ChevronLeft style={{ color: "white", fontSize: "20px" }} />
+      </IconButton>
+    </React.Fragment>
   );
 }
 
