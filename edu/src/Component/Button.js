@@ -1,19 +1,29 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const ButtonComponent = () => {
   const navigate = useNavigate();
   const handleClick = (buttonType) => {
-    if (buttonType == "Mindmap") {
+    if (buttonType ==="Mindmap") {
       navigate("/MindMapStart");
+    }
+    if (buttonType ==="Flashcards"){
+        navigate("/Flashcards")
+    }
+    if (buttonType ==="Quiz"){
+        navigate("/Quiz")
     }
   };
 
   return (
     <div style={styles.container}>
+    <ChakraProvider>
       <button style={styles.button} onClick={() => handleClick("Quiz")}>
         Quiz
       </button>
+      </ChakraProvider>
+
       <button style={styles.button} onClick={() => handleClick("Flashcards")}>
         Flashcards
       </button>
