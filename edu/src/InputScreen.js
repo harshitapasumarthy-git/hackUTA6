@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import MindMap from "./mindmap/MindMap";
-import NodeOptionsModal from "./mindmap/NodeOptionalModal";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { MindMapContext } from "./mindmap/MindMapContext";
 
-const MindMapStart = () => {
+const InputScreen = () => {
+  const { setMindMapData } = useContext(MindMapContext);
   const [documentText, setDocumentText] = useState(`{
     "name": "Distributed Systems",
     "children": [
@@ -23,31 +24,21 @@ const MindMapStart = () => {
     ]
   }`);
 
-  const [mindMapData, setMindMapData] = useState(null);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedNode, setSelectedNode] = useState(null);
+  const navigate = useNavigate();
 
   const handleTextChange = (e) => {
     setDocumentText(e.target.value);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-    setSelectedNode(null);
   };
 
   const generateMindMap = () => {
     try {
       const parsedData = JSON.parse(documentText);
       setMindMapData(parsedData);
+      navigate("/mindmap");
     } catch (error) {
       alert("Invalid JSON format. Please correct the JSON and try again.");
       console.error(error);
     }
-  };
-
-  const handleNodeClick = (nodeData) => {
-    alert(`Node clicked: ${nodeData.name}`);
   };
 
   return (
@@ -61,18 +52,8 @@ const MindMapStart = () => {
       ></textarea>
       <br />
       <button onClick={generateMindMap}>Generate Mind Map</button>
-      {mindMapData && (
-        <>
-          <MindMap data={mindMapData} onNodeClick={handleNodeClick} />
-          <NodeOptionsModal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            nodeName={selectedNode}
-          />
-        </>
-      )}
     </div>
   );
 };
 
-export default MindMapStart;
+export default InputScreen;

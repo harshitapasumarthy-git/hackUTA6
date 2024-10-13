@@ -3,11 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const ButtonComponent = () => {
   const navigate = useNavigate();
-  const handleClick = (buttonType) => {
-    if (buttonType == "Mindmap") {
-      navigate("/MindMapStart");
-    }
-  };
+  const handleClick = (buttonType) => {};
 
   return (
     <div style={styles.container}>
