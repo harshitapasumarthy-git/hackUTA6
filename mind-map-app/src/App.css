@@ -30,6 +30,7 @@
 .container {
   max-width: 600px;
   margin: 0 auto;
+  
 }
 
 h1 {
@@ -37,10 +38,12 @@ h1 {
 }
 #uploadbutton{
   width: 100%;
+  background-color: #FD8B51;
 }
 
 button {
   width: 50%;
+  backgroundColor: #DEE5D4;
 }
 
 
@@ -49,3 +52,13 @@ pre {
   padding: 15px;
   border-radius: 5px;
 }
+.custom-file-upload {
+  background-color: #FD8B51; /* Set a custom background color (blue in this case) */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+}
+
