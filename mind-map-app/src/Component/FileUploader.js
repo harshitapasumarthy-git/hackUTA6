@@ -22,7 +22,7 @@ const FileUploader = ({ onFileUpload }) => {
   };
 
   return (
-    <div className="form-group">
+    <div className="form-group" style={{justifyItems: 'center'}}>
       <input
         type="file"
         id="fileInput"
@@ -42,7 +42,7 @@ const FileUploader = ({ onFileUpload }) => {
           backgroundColor: "#FD8B51",
           color: "white",          
           alignItems: "center",
-          justifySelf: "center"
+          justifyContent: "center"
         }}
         disabled={isLoading}  // Disable the button while loading
       >
