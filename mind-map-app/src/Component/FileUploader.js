@@ -15,7 +15,7 @@ const FileUploader = ({ onFileUpload }) => {
 
       // Delay the onFileUpload call
       setTimeout(() => {
-        onFileUpload(file.name);  // Pass the file object to the parent component after delay
+        onFileUpload(file);  // Pass the file object to the parent component after delay
         setIsLoading(false);  // Set loading to false after the timeout ends
       }, delay);
     }
