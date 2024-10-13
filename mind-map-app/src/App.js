@@ -12,7 +12,8 @@ function App() {
     <Router>
       <Box
         sx={{
-          backgroundColor: "#D2E0FB", // Background color of the Box
+          backgroundImage:
+            "linear-gradient(68.6deg, rgba(79,183,131,1) 14.4%, rgba(254,235,151,1) 92.7%)", // Gradient background
           minHeight: "100vh", // Full viewport height
           display: "flex", // Flexbox for centering content
           flexDirection: "column", // Stack content vertically
@@ -29,7 +30,7 @@ function App() {
         </Routes>
 
         {/* Add an image at the bottom */}
-        <Box
+        {/* <Box
           component="img"
           sx={{
             marginTop: "auto", // Push the image to the bottom
@@ -39,7 +40,7 @@ function App() {
           }}
           src="/SuccessKid.jpg" // Replace with the path to your image
           alt="Bottom image"
-        />
+        /> */}
       </Box>
     </Router>
   );

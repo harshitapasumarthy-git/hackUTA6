@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="247b3e37-c540-490e-b823-277f9238760f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../backend/backend/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/backend/static/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mind-map-app/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../mind-map-app/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mind-map-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mind-map-app/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mind-map-app/src/Component/Button.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mind-map-app/src/Component/Button.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mind-map-app/src/Component/FileUploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mind-map-app/src/Component/FileUploader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mind-map-app/src/Component/MindMap/MindMap.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mind-map-app/src/Component/MindMap/MindMap.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mind-map-app/src/Component/UploadComponent/Upload.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../mind-map-app/src/Component/UploadComponent/Upload.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mind-map-app/src/Quiz/Quiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mind-map-app/src/Quiz/Quiz.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,9 +24,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2nMDf1rsVFyEL131ui4OR2tVvcE" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -32,6 +39,10 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/ramprasadreddygajjala/Documents/hackUTA6/edu",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -45,6 +56,7 @@
       <option name="presentableId" value="Default" />
       <updated>1728774152310</updated>
       <workItem from="1728774153342" duration="54000" />
+      <workItem from="1728803605854" duration="611000" />
     </task>
     <servers />
   </component>
