@@ -363,9 +363,9 @@ const lung_cancer = [
 function Quiz() {
   const location = useLocation();
   const { fileName } = location.state || {};
-  const [currentQuizData, setCurrentQuizData] = useState(defaultQuizData); // State to hold the current quiz data
+  const [currentQuizData, setCurrentQuizData] = useState(DS1); // State to hold the current quiz data
   const [userAnswers, setUserAnswers] = useState(
-    Array(defaultQuizData.length).fill(null)
+    Array(DS1.length).fill(null)
   ); // Track user's answers
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
@@ -384,8 +384,8 @@ function Quiz() {
       setCurrentQuizData(DS);
       setUserAnswers(Array(DS.length).fill(null));
     } else {
-      setCurrentQuizData(defaultQuizData);
-      setUserAnswers(Array(defaultQuizData.length).fill(null)); // Reset user answers
+      setCurrentQuizData(DS1);
+      setUserAnswers(Array(DS1.length).fill(null)); // Reset user answers
     }
   }, [fileName]);
 
@@ -479,18 +479,18 @@ function Quiz() {
                       cursor: "pointer",
                       width: "100%",
                       backgroundColor:
-                        userAnswers[index] === option ? "#1976d2" : "white",
+                        userAnswers[index] === option ? "#FD8B51" : "white",
                       color: userAnswers[index] === option ? "white" : "black",
                       margin: "5px 0",
-                      transition: "background-color 0.3s",
+                      transition: "#FD8B51",
                     }}
                     onMouseEnter={(e) =>
                       (e.currentTarget.style.backgroundColor =
-                        userAnswers[index] === option ? "#1565c0" : "#f5f5f5")
+                        userAnswers[index] === option ? "#FD8B51" : "#f5f5f5")
                     }
                     onMouseLeave={(e) =>
                       (e.currentTarget.style.backgroundColor =
-                        userAnswers[index] === option ? "#1976d2" : "white")
+                        userAnswers[index] === option ? "#FD8B51" : "white")
                     }
                   >
                     {option}
@@ -505,7 +505,7 @@ function Quiz() {
                 padding: "10px 20px",
                 border: "none",
                 borderRadius: "5px",
-                backgroundColor: "#1976d2",
+                backgroundColor: userAnswers.includes(null) ? "#F4CBB2" : "#FD8B51", // lighter shade when disabled
                 color: "white",
                 cursor: "pointer",
                 fontSize: "16px",
