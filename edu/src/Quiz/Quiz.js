@@ -67,10 +67,8 @@ function Quiz() {
         minHeight: "100vh", // Full viewport height to center vertically
         gap: 3, // Spacing between the elements
         padding: 3,
-    backgroundImage: `url('/background.jpg')`, // Use the root-relative path for images in public folder
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
+        backgroundColor:'#CFE8F6'
+
     
     
       }}

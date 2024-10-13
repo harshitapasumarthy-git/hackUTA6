@@ -38,3 +38,20 @@
     transform: rotate(360deg);
   }
 }
+
+.node circle {
+  fill: #00aaff;
+  cursor: pointer;
+}
+
+.node text {
+  font: 12px sans-serif;
+  cursor: pointer;
+}
+
+.link {
+  fill: none;
+  stroke: #555;
+  stroke-opacity: 0.6;
+  stroke-width: 1.5px;
+}
