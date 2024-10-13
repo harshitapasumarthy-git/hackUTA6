@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Graph } from "react-d3-graph";
 import config from "./mindmap.config";
-import { initialDSNodes, initialDSLinks } from "./lecture1";
+import { initialDSNodes, initialDSLinks } from "./distributed_systems";
+import { initialLungNodes, initialLungLinks } from "./lung";
+import { useParams } from 'react-router-dom';
 
 const containerWidth = 1300; 
 const containerHeight = 700;
@@ -25,17 +27,29 @@ const generateCoordinates = (nodes, centerX, centerY, radius) => {
 const MindMap = () => {  
   const [selectedNode, setSelectedNode] = useState();
   const [selectedDescription, setSelectedDescription] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);  
+  const { fileName } = useParams();
+  console.log("Filename: "+fileName)
+
+  let nodeData = initialDSNodes;
+  let linkData = initialDSLinks;
+
+  if (fileName !== null) {
+    if("lung.pdf" === fileName) {
+        nodeData = initialLungNodes;
+        linkData = initialLungLinks;
+    } 
+  }
   
-  const nodesWithCoordinates = generateCoordinates(initialDSNodes, centerX, centerY, radius);
+  const nodesWithCoordinates = generateCoordinates(nodeData, centerX, centerY, radius);
   
   const graphData = {
     nodes: nodesWithCoordinates,
-    links: initialDSLinks,
+    links: linkData,
   };
   
   const handleOnClick = (nodeId) => {
-    const node = initialDSNodes.find(n => n.id === nodeId);
+    const node = nodeData.find(n => n.id === nodeId);
     if (node) {
       setSelectedNode((prev) => nodeId)
       setSelectedDescription((_) => node.description); 
