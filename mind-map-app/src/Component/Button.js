@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react";
 
 const ButtonComponent = () => {
   const navigate = useNavigate();
@@ -17,13 +16,10 @@ const ButtonComponent = () => {
   };
 
   return (
-    <div style={styles.container}>
-    <ChakraProvider>
+    <div style={styles.container}>    
       <button style={styles.button} onClick={() => handleClick("Quiz")}>
         Quiz
-      </button>
-      </ChakraProvider>
-
+      </button>    
       <button style={styles.button} onClick={() => handleClick("Flashcards")}>
         Flashcards
       </button>

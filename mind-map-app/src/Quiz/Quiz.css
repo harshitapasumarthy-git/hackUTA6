@@ -1,0 +1,89 @@
+/* General styles for the quiz container */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.result-section {
+    text-align: center;
+}
+
+/* Style for each quiz card */
+.quiz-card {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+/* Style for question text */
+.quiz-card h6 {
+    text-align: center;
+    margin: 0 0 10px;
+}
+
+/* Style for options */
+.option {
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    margin: 5px 0;
+    transition: background-color 0.3s;
+}
+
+/* Style for selected options */
+.option.selected {
+    background-color: #1976d2;
+    color: white;
+}
+
+/* Hover effect for options */
+.option:hover {
+    background-color: #f5f5f5;
+}
+
+/* Submit button styling */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1976d2;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #1565c0;
+}
+
+/* Style for answer review */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+ul li strong {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
