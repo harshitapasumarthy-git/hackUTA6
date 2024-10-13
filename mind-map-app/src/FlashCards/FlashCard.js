@@ -4,8 +4,8 @@ import FlipCameraAndroidIcon from '@material-ui/icons/FlipCameraAndroid';
 // import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import './FlashCard.css'; // For card flip CSS
 
-const FlashCard = ({ question, answer }) => {
-  const [flipped, setFlipped] = useState(false);
+const FlashCard = ({ question, answer, isFlipped }) => {
+  const [flipped, setFlipped] = useState(isFlipped);
 
   const handleFlip = () => {
     setFlipped((prevFlipped) => !prevFlipped);

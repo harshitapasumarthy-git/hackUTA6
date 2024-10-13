@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FileUploader from "./FileUploader";
 
 const ButtonComponent = ({ onProcessFile }) => {
   const [showFileUploader, setShowFileUploader] = useState(false);
   const [fileName, setFileName] = useState(null);
+
+  // useEffect(() => {    
+  //   const storedFileName = localStorage.getItem("uploadedFileName");
+  //   if (storedFileName) {
+  //     setFileName(storedFileName);
+  //   }
+  // }, []);
 
   // Handle the button click to toggle fileName uploader
   const handleButtonClick = () => {
@@ -17,6 +24,7 @@ const ButtonComponent = ({ onProcessFile }) => {
   const handleFileNameUpload = (fileName) => {
     setFileName(fileName);
     if (fileName) {
+      localStorage.setItem("uploadedFileName", fileName);
       onProcessFile(fileName); // Process the fileName content on second click
     } // Save fileName name
   };

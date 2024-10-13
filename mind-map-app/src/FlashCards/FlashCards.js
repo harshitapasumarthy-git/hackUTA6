@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import FlashCard from "./FlashCard";
+import { ChevronRight } from "@material-ui/icons"; // Import Material UI Icon
+import { ChevronLeft } from "@material-ui/icons";
+import { IconButton } from "@material-ui/core"; // Import Material UI IconButton
+import {  useNavigate } from "react-router-dom";
 
 const flashcardData = [
   { question: "What is the capital of France?", answer: "Paris" },
@@ -140,6 +144,8 @@ const FlashCards = () => {
   const pageSize = 6; // Number of flashcards per page
   const totalPages = Math.ceil(currentFlashcardsData.length / pageSize);
 
+  const navigate = useNavigate();
+
   // Update flashcards based on the fileName
   useEffect(() => {
     if (fileName === "DS1.pdf") {
@@ -192,11 +198,24 @@ const FlashCards = () => {
     startIndex + pageSize
   );
 
+  const goNext = () => {    
+    navigate("/Quiz", {
+      state: { fileName: fileName },
+    });
+  };
 
-    return (
+  const goPrev = () => {    
+    navigate("/MindMap", {
+      state: { fileName: fileName },
+    });
+  };
+
+
+  return (
+    <React.Fragment>
       <div className="flashcards-container">
         <h1>Flash Cards</h1>
-  
+
         {/* View Mode Selector */}
         <div className="view-mode-buttons">
           <button
@@ -212,12 +231,13 @@ const FlashCards = () => {
             View All
           </button>
         </div>
-  
+
         {viewMode === "one" ? (
           <div className="flashcard-navigation">
             <FlashCard
               question={currentFlashcardsData[currentIndex].question}
               answer={currentFlashcardsData[currentIndex].answer}
+              isFlipped={false}
             />
             <div className="nav-buttons">
               <button
@@ -247,6 +267,7 @@ const FlashCards = () => {
                   <FlashCard
                     question={flashcard.question}
                     answer={flashcard.answer}
+                    isFlipped={false}
                   />
                 </div>
               ))}
@@ -273,8 +294,35 @@ const FlashCards = () => {
           </div>
         )}
       </div>
-    );
-  };
-  
+      <IconButton
+        onClick={goNext}
+        style={{
+          position: "absolute",
+          right: "20px",
+          top: "50%",
+          width: "35px",
+          backgroundColor: "#FD8B51",
+          padding: "5px",
+        }}
+      >
+        <ChevronRight style={{ color: "white", fontSize: "20px" }} />
+      </IconButton>
+
+      <IconButton
+        onClick={goPrev}
+        style={{
+          position: "absolute",
+          left: "20px",
+          top: "50%",
+          width: "35px",
+          backgroundColor: "#FD8B51",
+          padding: "5px",
+        }}
+      >
+        <ChevronLeft style={{ color: "white", fontSize: "20px" }} />
+      </IconButton>
+    </React.Fragment>
+  );
+};
 
 export default FlashCards;
