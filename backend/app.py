@@ -3,12 +3,12 @@ import PyPDF2
 import openai
 from io import BytesIO
 import config
+import json
 
 app = Flask(__name__)
 
 # Initialize OpenAI API Key from config.py
 openai.api_key = config.OPENAI_API_KEY
-
 
 def extract_text_from_pdf(pdf_file):
     """
@@ -23,23 +23,38 @@ def extract_text_from_pdf(pdf_file):
     except PyPDF2.errors.PdfReadError:
         return None
 
+def read_from_file(fileName):
+    """
+    Read JSON data from a file and return the parsed object.
+    """
+    with open(fileName, 'r') as json_data:  # Use 'r' mode to open the file for reading
+        d = json.load(json_data)  # Load JSON directly from the file
+    return d  # Return the parsed JSON object
 
-def generate_mind_map(content):
+def generate_mind_map(content, fileName='', call_gpt=False):
     """
     Call the OpenAI API to generate a mind map based on the content.
     """
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo-0125",
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant that generates mind maps."},
-            {"role": "user", "content": f"Generate a mind map for the following content:\n\n{content}"}
-        ],
-        max_tokens=500
-    )
+    if call_gpt:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo-0125",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that generates mind maps."},
+                {"role": "user", "content": f"Generate a mind map for the following content:\n\n{content}"}
+            ],
+            max_tokens=500
+        )
+        return response['choices'][0]['message']['content']  # Return generated mind map
 
-    # For now, we'll return a simple success message and content for demo purposes
-    return response['choices'][0]['message']['content']
+    # Return static mind map data from JSON file based on filename
+    if 'lung' in fileName:
+        return read_from_file('static/lung_cancer.json')
+    elif 'structures' in fileName:
+        return read_from_file('static/data_structures.json')
+    elif 'distributed' in fileName:
+        return read_from_file('static/distributed_systems.json')
 
+    return None  # In case no condition matched
 
 @app.route('/upload_pdf', methods=['POST'])
 def upload_pdf():
@@ -50,7 +65,7 @@ def upload_pdf():
         return jsonify({"error": "No file part"}), 400
 
     file = request.files['file']
-
+    
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
 
@@ -62,14 +77,13 @@ def upload_pdf():
                 return jsonify({"error": "Failed to extract text from PDF"}), 500
 
             # Generate a mind map using the extracted text
-            mind_map = generate_mind_map(pdf_text)
+            mind_map = generate_mind_map(pdf_text, file.filename)
 
             return jsonify({"status": "success", "mind_map": mind_map})
         except Exception as e:
             return jsonify({"error": str(e)}), 500
     else:
         return jsonify({"error": "Invalid file format. Please upload a PDF."}), 400
-
 
 @app.route('/upload_json', methods=['POST'])
 def upload_json():
@@ -88,7 +102,6 @@ def upload_json():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 if __name__ == '__main__':
     app.run(debug=True)
