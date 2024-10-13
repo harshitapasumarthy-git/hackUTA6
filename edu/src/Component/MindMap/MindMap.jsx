@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Graph } from "react-d3-graph";
-import config from "./mindmap.config";  // Import the configuration
+import config from "./mindmap.config";
+import { initialDSNodes, initialDSLinks } from "./lecture1";
 
 const containerWidth = 1300; 
 const containerHeight = 700;
@@ -23,38 +24,77 @@ const generateCoordinates = (nodes, centerX, centerY, radius) => {
 
 const MindMap = () => {  
 
-  const initialNodes = [
-    { id: "Central Idea", color: "red", symbolType: "square" },
-    { id: "Sub Idea 1", color: "lightblue" },
-    { id: "Sub Idea 2", color: "lightgreen" },
-    { id: "Sub Idea 3", color: "orange" },
-  ];
+  const [selectedDescription, setSelectedDescription] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
-  const initialLinks = [
-    { source: "Central Idea", target: "Sub Idea 1" },
-    { source: "Central Idea", target: "Sub Idea 2" },
-    { source: "Central Idea", target: "Sub Idea 3" },
-  ];
-  
-  const nodesWithCoordinates = generateCoordinates(initialNodes, centerX, centerY, radius);
+  const nodesWithCoordinates = generateCoordinates(initialDSNodes, centerX, centerY, radius);
   
   const graphData = {
     nodes: nodesWithCoordinates,
-    links: initialLinks,
+    links: initialDSLinks,
   };
   
+  const handleOnClick = (nodeId) => {
+    const node = initialDSNodes.find(n => n.id === nodeId);
+    if (node) {
+      setSelectedDescription((_) => node.description); 
+      setIsModalOpen((_) => true);
+    }
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  }
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "80vh" }}>
-      <div style={{ width: "80%", height: "80%", border: "2px solid black" }}> 
+      <div style={{ width: "100%", height: "100%"}}> 
         <Graph
           id="mindmap"
           data={graphData}
-          config={config}  // Use the imported config
+          config={config}
+          onClickNode={handleOnClick}  
         />
+        {/* Modal */}
+        {isModalOpen && (
+          <div style={modalStyles.overlay}>
+            <div style={modalStyles.modal}>
+              <h3>Description:</h3>
+              <p>{selectedDescription}</p>
+              <button onClick={closeModal} style={modalStyles.closeButton}>Close</button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
+
+const modalStyles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modal: {
+    backgroundColor: 'white',
+    padding: '20px',
+    borderRadius: '5px',
+    width: '300px',
+    textAlign: 'center',
+  },
+  closeButton: {
+    marginTop: '10px',
+    padding: '10px',
+    cursor: 'pointer',
+  },
+};
+
 
 export default MindMap;

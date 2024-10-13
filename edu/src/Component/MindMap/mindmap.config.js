@@ -1,10 +1,13 @@
 const config = {
     nodeHighlightBehavior: true,
     automaticRearrangeAfterDropNode: true,
-    width: window.innerWidth * 0.8,   // Dynamically adjust the graph size
-    height: window.innerHeight * 0.8, // Dynamically adjust the graph size
+    node: {
+      size: 700
+    },
+    width: window.innerWidth * 1.0,   
+    height: window.innerHeight * 1.0, 
     d3: {
-      gravity: -200,  // Adjust gravity for node spacing
+      gravity: -500,  
     },
   };
   
