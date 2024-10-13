@@ -24,7 +24,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/FlashCards" element={<FlashCards />} />
           <Route path="/Quiz" element={<Quiz />} />
-          <Route path="/MindMap/:fileName" element={<MindMap />} />
+          <Route path="/MindMap" element={<MindMap />} />
         </Routes>
       </Box>
     </Router>

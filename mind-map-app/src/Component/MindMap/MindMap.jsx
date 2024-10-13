@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Graph } from "react-d3-graph";
-import { useParams } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import { initialDataSLinks, initialDataSNodes } from "./data_structures";
 import { initialDSLinks, initialDSNodes } from "./distributed_systems";
 import { initialLungLinks, initialLungNodes } from "./lung";
 import config from "./mindmap.config";
@@ -25,10 +26,13 @@ const generateCoordinates = (nodes, centerX, centerY, radius) => {
 
 
 const MindMap = () => {  
+  
+  const location = useLocation();
+  const { fileName } = location.state || {};
+
   const [selectedNode, setSelectedNode] = useState();
   const [selectedDescription, setSelectedDescription] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);  
-  const { fileName } = useParams();
   console.log("Filename: "+fileName)
 
   let nodeData = initialDSNodes;
@@ -39,6 +43,17 @@ const MindMap = () => {
         nodeData = initialLungNodes;
         linkData = initialLungLinks;
     } 
+   else if("DS1.pdf" === fileName) {
+      nodeData = initialDSNodes;
+      linkData = initialDSLinks;
+  } 
+  else if("DS2.pdf" === fileName) {
+    nodeData = initialDSNodes;
+    linkData = initialDSLinks;
+}  else if("Data_structures.pdf" === fileName) {
+  nodeData = initialDataSNodes;
+  linkData = initialDataSLinks;
+} 
   }
   
   const nodesWithCoordinates = generateCoordinates(nodeData, centerX, centerY, radius);
