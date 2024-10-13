@@ -40,9 +40,9 @@ const FileUploader = ({ onFileUpload }) => {
           fontSize: "14px",
           cursor: "pointer",
           backgroundColor: "#FD8B51",
-          color: "white",
-          display: "flex",  // Added flexbox to align the icon and label horizontally
+          color: "white",          
           alignItems: "center",
+          justifySelf: "center"
         }}
         disabled={isLoading}  // Disable the button while loading
       >
