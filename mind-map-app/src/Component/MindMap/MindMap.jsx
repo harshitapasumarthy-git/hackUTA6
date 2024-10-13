@@ -16,6 +16,44 @@ const centerY = containerHeight / 2;
 const distance = 150;
 const radius = 50;
 
+const calculateNodeWeightsAndColors = (nodes, links) => {
+  const nodeWeights = {};
+  
+  nodes.forEach((node) => {
+    nodeWeights[node.id] = 0;
+  });
+
+  links.forEach((link) => {
+    if (nodeWeights[link.source] !== undefined) {
+      nodeWeights[link.source] += 1;
+    }
+    if (nodeWeights[link.target] !== undefined) {
+      nodeWeights[link.target] += 1;
+    }
+  });
+
+  // Add the weight to each node and assign a color based on the weight
+  return nodes.map((node) => {
+    const weight = nodeWeights[node.id];
+    return {
+      ...node,
+      weight, // Add the calculated weight to each node
+      color: getColorByWeight(weight), // Assign a color based on the weight
+    };
+  });
+};
+
+// Function to get a color based on the weight of the node
+const getColorByWeight = (weight) => {
+  // Example color ranges based on node weight
+  if (weight >= 7) return "red";
+  if (weight >= 6) return "blue";
+  if (weight >= 5) return "purple";
+  if (weight >= 4) return "lightgreen";
+  if (weight >= 3) return "orange";
+  return "gray"; // Default color for nodes with no links
+};
+
 const generateCoordinates = (nodes, centerX, centerY, radius) => {
   const angleIncrement = (2 * Math.PI) / nodes.length; // Divide circle into equal angles
   return nodes.map((node, index) => {

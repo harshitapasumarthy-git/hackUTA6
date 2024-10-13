@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import ButtonComponent from "../Button";
 
-const Upload = ({callBack}) => {
+const Upload = ({ callBack }) => {
   const [loading, setLoading] = useState(false);
-    
+
   const handleProcessFile = async (file) => {
     setLoading(true);
     const formData = new FormData();
@@ -20,36 +20,34 @@ const Upload = ({callBack}) => {
 
     Output the generated JSON structure.
   `;
-    formData.append('file', file); 
-    formData.append('prompt', prompt); 
-    alert('File upload successful:', file);
+    formData.append("file", file);
+    formData.append("prompt", prompt);
 
     try {
-      const response = await fetch('http://localhost:5000/upload', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/upload_pdf", {
+        method: "POST",
         body: formData,
       });
-  
+
       if (!response.ok) {
-        throw new Error('File upload failed');
+        throw new Error("File upload failed");
       }
-  
+
       const data = await response.json();
-      console.log('File upload successful:', data);
-      alert('File upload successful:', data);
+      console.log("File upload successful:", data);
+      alert("File upload successful:", data);
     } catch (error) {
-      console.error('Error uploading file:', error);
+      console.error("Error uploading file:", error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-      <div className="container">
-    
-        <ButtonComponent onProcessFile={handleProcessFile} />
-      </div>    
+    <div className="container">
+      <ButtonComponent onProcessFile={handleProcessFile} />
+    </div>
   );
-}
+};
 
 export default Upload;

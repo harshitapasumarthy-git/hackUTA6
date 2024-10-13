@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import PyPDF2
 import openai
 from io import BytesIO
@@ -6,6 +7,8 @@ import config
 import json
 
 app = Flask(__name__)
+
+CORS(app)
 
 # Initialize OpenAI API Key from config.py
 openai.api_key = config.OPENAI_API_KEY
