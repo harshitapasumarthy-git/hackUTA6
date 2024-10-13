@@ -192,100 +192,89 @@ const FlashCards = () => {
     startIndex + pageSize
   );
 
-  return (
-    <div style={{ textAlign: "center", padding: "20px", minHeight: "100vh" }}>
-      <h1>Flash Cards</h1>
 
-      {/* View Mode Selector */}
-      <div style={{ marginBottom: "50px" }}>
-        <button
-          onClick={() => handleViewModeChange("one")}
-          style={{ marginRight: "10px", padding: "10px" }}
-        >
-          One by One
-        </button>
-        <button
-          onClick={() => handleViewModeChange("all")}
-          style={{ padding: "10px" }}
-        >
-          View All
-        </button>
-      </div>
-
-      {viewMode === "one" ? (
-        // Single card view
-        <div style={{ marginBottom: "50px" }}>
-          <FlashCard
-            question={currentFlashcardsData[currentIndex].question}
-            answer={currentFlashcardsData[currentIndex].answer}
-          />
-          <div>
-            <button
-              onClick={goToPrevCard}
-              disabled={currentIndex === 0}
-              style={{ marginRight: "10px" }}
-            >
-              &#8592; Previous
-            </button>
-            <button
-              onClick={goToNextCard}
-              disabled={currentIndex === currentFlashcardsData.length - 1}
-            >
-              Next &#8594;
-            </button>
-          </div>
-          <p>
-            Card {currentIndex + 1} of {currentFlashcardsData.length}
-          </p>
-        </div>
-      ) : (
-        // View all cards with pagination
-        <div>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-            }}
+    return (
+      <div className="flashcards-container">
+        <h1>Flash Cards</h1>
+  
+        {/* View Mode Selector */}
+        <div className="view-mode-buttons">
+          <button
+            onClick={() => handleViewModeChange("one")}
+            className={`view-button ${viewMode === "one" ? "active" : ""}`}
           >
-            {currentFlashcards.map((flashcard, index) => (
-              <div
-                key={startIndex + index}
-                style={{
-                  margin: "10px",
-                  padding: "10px",
-                  border: "1px solid #ccc",
-                }}
-              >
-                <FlashCard
-                  question={flashcard.question}
-                  answer={flashcard.answer}
-                />
-              </div>
-            ))}
-          </div>
-          <div style={{ marginTop: "50px" }}>
-            <button
-              onClick={goToPrevPage}
-              disabled={pageIndex === 0}
-              style={{ marginRight: "10px" }}
-            >
-              &#8592; Previous Page
-            </button>
-            <button
-              onClick={goToNextPage}
-              disabled={pageIndex === totalPages - 1}
-            >
-              Next Page &#8594;
-            </button>
-          </div>
-          <p>
-            Page {pageIndex + 1} of {totalPages}
-          </p>
+            One by One
+          </button>
+          <button
+            onClick={() => handleViewModeChange("all")}
+            className={`view-button ${viewMode === "all" ? "active" : ""}`}
+          >
+            View All
+          </button>
         </div>
-      )}
-    </div>
-  );
-};
+  
+        {viewMode === "one" ? (
+          <div className="flashcard-navigation">
+            <FlashCard
+              question={currentFlashcardsData[currentIndex].question}
+              answer={currentFlashcardsData[currentIndex].answer}
+            />
+            <div className="nav-buttons">
+              <button
+                onClick={goToPrevCard}
+                disabled={currentIndex === 0}
+                className="nav-button"
+              >
+                &#8592; Previous
+              </button>
+              <button
+                onClick={goToNextCard}
+                disabled={currentIndex === currentFlashcardsData.length - 1}
+                className="nav-button"
+              >
+                Next &#8594;
+              </button>
+            </div>
+            <p>
+              Card {currentIndex + 1} of {currentFlashcardsData.length}
+            </p>
+          </div>
+        ) : (
+          <div className="all-flashcards">
+            <div className="flashcards-list">
+              {currentFlashcards.map((flashcard, index) => (
+                <div key={startIndex + index} className="flashcard-item">
+                  <FlashCard
+                    question={flashcard.question}
+                    answer={flashcard.answer}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="pagination-buttons">
+              <button
+                onClick={goToPrevPage}
+                disabled={pageIndex === 0}
+                className="pagination-button"
+              >
+                &#8592; Previous Page
+              </button>
+              <button
+                onClick={goToNextPage}
+                disabled={pageIndex === totalPages - 1}
+                className="pagination-button"
+              >
+                Next Page &#8594;
+              </button>
+            </div>
+            <p>
+              Page {pageIndex + 1} of {totalPages}
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  };
+  
 
 export default FlashCards;
